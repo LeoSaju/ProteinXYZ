@@ -1,0 +1,36 @@
+<!-- myapp/templates/myapp/protein.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Protein Size</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Upload PDB File to Determine Protein Size</h1>
+        <form method="post" enctype="multipart/form-data" class="mt-4">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.pdb_file.label_tag }}
+                {{ form.pdb_file }}
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+
+        {% if size_x and size_y and size_z %}
+            <h2 class="mt-5">Protein Dimensions</h2>
+            <ul class="list-group">
+                <li class="list-group-item">X: {{ size_x }} Å</li>
+                <li class="list-group-item">Y: {{ size_y }} Å</li>
+                <li class="list-group-item">Z: {{ size_z }} Å</li>
+            </ul>
+        {% endif %}
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
